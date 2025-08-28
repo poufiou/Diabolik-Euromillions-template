@@ -1,1 +1,1 @@
-# Script de mise à jour automatique des résultats depuis le site officiel
+# TODO: Implémenter la récupération des résultats depuis le site officiel
