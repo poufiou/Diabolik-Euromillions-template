@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -18,12 +19,20 @@ jobs:
           python-version: '3.10'
 
       - name: Install dependencies
-        run: pip install pandas
+        run: pip install -r requirements.txt
 
-      - name: Run Diabolik v6
+      - name: Génération des grilles (v6)
+        run: python generateur_grilles_v6.py
+
+      - name: Mise à jour des résultats
+        run: python maj_resultats.py
+
+      - name: Vérification des gains
+        run: python verificateur_gains.py
+
+      - name: Notification par email
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
-        run: |
-          python generateur_grilles_v6.py
+        run: python notificateur.py
