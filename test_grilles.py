@@ -1,1 +1,2 @@
-# Script Python pour le projet Diabolik Euromillions
+def test_generateur():
+    assert True
